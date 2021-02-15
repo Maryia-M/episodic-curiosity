@@ -215,17 +215,26 @@ def build_video(trajectory_visualizations, episode_buffer,
                 memory_visualizations, visualization_type, output_path):
   """Creates and saves a video from the given frames."""
   video_frames = []
+  print("trajectory_vis_len:", len(trajectory_visualizations), "episode_buffer:", len(episode_buffer),"memory_len:",len(memory_visualizations)) 
+  count = 0
   for agent, obs, memory in zip(trajectory_visualizations, episode_buffer,
                                 memory_visualizations):
+    
     if visualization_type == 'surrogate_reward':
       obs_frame = skimage.transform.resize(obs[0], [
           LEVEL_MAZE_SIZE * CELL_SIZE_PIXELS, LEVEL_MAZE_SIZE * CELL_SIZE_PIXELS
       ], mode='constant', preserve_range=True)
       video_frame = np.concatenate((agent, memory, obs_frame), axis=1)
+      if count % 20 == 0:
+        print("video frame created {}".format(count))
     else:
       video_frame = obs[0]
     video_frames.append(video_frame)
+    count += 1
+  print("I finished the loop")
+  print("output path", output_path)
   ec_logging.save_episode_buffer_as_video(video_frames, output_path)
+  print("video saved")
 
 
 def create_image(memory,
@@ -300,7 +309,7 @@ def create_image(memory,
       # angle.
       draw_square(
           row, col, image, cell_size, CELL_SIZE_PIXELS // 4, color=color)
-
+  #print(image)
   return image
 
 
@@ -308,11 +317,14 @@ def build_one_trajectory(episode_i=0, xm_series=None):
   """Builds the visualization for one episode. Saves files to workdir."""
   # We re-build the env to make sure we control the seed.
   num_envs = 1
+  print('**********************************')
+  print('FLAGS.dmlab', FLAGS.dmlab_homepath)
   env, _, _ = env_factory.create_environments(
       LEVEL_NAME,
       num_envs,
       FLAGS.r_net_weights,
       FLAGS.dmlab_homepath,
+      #'~/episodic-curiosity/lab/bazel-bin',
       action_set=FLAGS.action_set,
       base_seed=FLAGS.base_env_seed + episode_i,
       environment_engine=FLAGS.environment_engine)
@@ -364,15 +376,19 @@ def build_one_trajectory(episode_i=0, xm_series=None):
     reward = rewards[0]
     if xm_series:
       xm_series.create_measurement(reward, step_i)
+    #print("infos:", infos)
     done = dones[0]
     info = infos[0]
     if done:
       break
     memory = env.get_episodic_memory(0)
+    print("The next step is to create image")
     if not trajectory_visualizations:
+      print("is not trajectory_visualizations")
       trajectory_visualizations.append(
           create_image(memory, info, reward))
     else:
+      print("is trajectory_visualizations")
       trajectory_visualizations.append(
           create_image(
               memory,
@@ -385,7 +401,7 @@ def build_one_trajectory(episode_i=0, xm_series=None):
             memory, info, reward, plot_agent=False, plot_memory=True))
     episode_buffer.append(
         (process_env_frame(utils.get_frame(observation, info), reward), info))
-
+  print("The next step is to build video")
   build_video(
       trajectory_visualizations, episode_buffer, memory_visualizations,
       FLAGS.visualization_type,
@@ -420,6 +436,8 @@ def make_model(env):
 
 
 def load_policy(model_path, env):
+  print('****************************')
+  print('policy path is', model_path)
   """Loads a trained policy from a checkpoint.
 
   Args:

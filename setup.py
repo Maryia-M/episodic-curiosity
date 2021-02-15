@@ -24,21 +24,22 @@ VERSION = '1.0.0'
 install_requires = [
     # See installation instructions:
     # https://github.com/deepmind/lab/tree/master/python/pip_package
-    'DeepMind-Lab',
+    #'DeepMind-Lab',
     'absl-py>=0.7.0',
     'dill>=0.2.9',
-    'enum>=0.4.7',
+    #'enum>=0.4.7',
     # Won't be needed anymore when moving to python3.
-    'futures>=3.2.0',
+    #'futures>=3.2.0',
     'gin-config>=0.1.2',
     'gym>=0.10.9',
     'numpy>=1.16.0',
     'opencv-python>=4.0.0.21',
-    'pypng>=0.0.19',
-    'pytype>=2019.1.18',
+    #'pypng>=0.0.19',
+    #'pytype>=2019.1.18',
     'scikit-image>=0.14.2',
     'six>=1.12.0',
-    'tensorflow-gpu>=1.12.0',
+    'tensorflow==1.13.1',	
+    #'tensorflow-gpu>=1.12.0',
 ]
 
 description = ('Episodic Curiosity. This is the code that allows reproducing '
@@ -62,7 +63,7 @@ setuptools.setup(
             # For installation of dm_control see:
             # https://github.com/deepmind/dm_control#requirements-and-installation.
             'dm_control',
-            'functools32',
+            #'functools32',
             'scikit-image',
         ],
     },

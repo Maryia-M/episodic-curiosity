@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: episodic-curiosity
+Version: 1.0.0
+Summary: Episodic Curiosity. This is the code that allows reproducing the results in the scientific paper https://arxiv.org/pdf/1810.02274.pdf.
+Home-page: https://github.com/google-research/episodic-curiosity
+Author: Google LLC
+Author-email: opensource@google.com
+License: Apache 2.0
+Description: Episodic Curiosity. This is the code that allows reproducing the results in the scientific paper https://arxiv.org/pdf/1810.02274.pdf.
+Keywords: reinforcement-learning curiosity exploration deepmind-lab
+Platform: UNKNOWN
+Provides-Extra: mujoco
+Provides-Extra: video

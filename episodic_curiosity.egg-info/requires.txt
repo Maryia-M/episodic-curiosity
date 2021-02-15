@@ -1,0 +1,9 @@
+absl-py>=0.7.0
+dill>=0.2.9
+
+[mujoco]
+dm_control
+scikit-image
+
+[video]
+sk-video

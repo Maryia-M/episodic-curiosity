@@ -14,6 +14,7 @@ from third_party.baselines.common.runners import AbstractEnvRunner
 from third_party.baselines.ppo2 import pathak_utils
 import numpy as np
 import tensorflow as tf
+import _pickle
 
 
 class Model(object):
@@ -131,8 +132,7 @@ class Model(object):
 
     def load(load_path):
       with tf.gfile.Open(load_path, 'rb') as fh:
-        val = fh.read()
-        loaded_params = dill.loads(val)
+        loaded_params = dill.load(fh, encoding="latin1")
       restores = []
       for p, loaded_p in zip(params, loaded_params):
         restores.append(p.assign(loaded_p))

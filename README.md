@@ -2,6 +2,9 @@
 
 #### In ICLR 2019 [[Project Website](https://sites.google.com/corp/view/episodic-curiosity)][[Paper](https://arxiv.org/abs/1810.02274)]
 
+This is my updates to run it with Python3.6.
+To install deepmind_lab you can use [my prebuilt wheel](https://drive.google.com/file/d/1j0hLtAoKFjgE0tpf5M3mynsw1UmzyNOj/view?usp=sharing) instead of building it as in original instruction below.
+
 [Nikolay Savinov¹](http://people.inf.ethz.ch/nsavinov/), [Anton Raichuk²](https://ai.google/research/people/AntonRaichuk), [Raphaël Marinier²](https://ai.google/research/people/105955), Damien Vincent², [Marc Pollefeys¹](https://www.inf.ethz.ch/personal/marc.pollefeys/), [Timothy Lillicrap³](http://contrastiveconvergence.net/~timothylillicrap/index.php), [Sylvain Gelly²](https://ai.google/research/people/SylvainGelly)<br/>
 ¹ETH Zurich, ²Google AI, ³DeepMind<br/>
 
